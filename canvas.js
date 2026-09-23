@@ -572,6 +572,11 @@ let autosCarretera = [
   { x: 20, carril: 60, velocidad: 2.2 },
   { x: 200, carril: 130, velocidad: 1.6 },
 ];
+let tallerMultiplicadorVelocidad = 1;
+
+document.getElementById('tallerSliderVelocidad').addEventListener('input', (evento) => {
+  tallerMultiplicadorVelocidad = Number(evento.target.value);
+});
 let idFrameCarretera = null;
 let tallerUltimoTs = 0;
 let tallerCuadros = 0;
@@ -594,7 +599,7 @@ const tallerTickCarretera = (ts) => {
 
   contextoCarretera.clearRect(0, 0, tallerCanvas4.width, tallerCanvas4.height);
   autosCarretera.forEach((auto) => {
-    auto.x += auto.velocidad;
+    auto.x += auto.velocidad * tallerMultiplicadorVelocidad;
     if (auto.x > tallerCanvas4.width) auto.x = -40;
     dibujarAuto(contextoCarretera, auto);
   });
