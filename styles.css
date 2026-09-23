@@ -156,3 +156,113 @@ p {
   padding: 0.6rem 1.1rem;
   font-size: 0.9rem;
 }
+
+/* PARTE 3: ENCABEZADO Y NAVEGACIÓN */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(251, 243, 236, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-cream-soft);
+}
+
+.header__inner {
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-right: auto;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.brand__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm) 6px var(--radius-sm) 6px;
+  background: var(--color-sky);
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.brand__text em {
+  font-style: normal;
+  color: var(--color-ink-light);
+}
+
+.nav__list {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.nav__link {
+  position: relative;
+  padding-bottom: 4px;
+  transition: color var(--transition-base);
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-clay);
+  transition: width var(--transition-base);
+}
+
+.nav__link:hover,
+.nav__link.is-active {
+  color: var(--color-ink);
+}
+
+.nav__link:hover::after,
+.nav__link.is-active::after {
+  width: 100%;
+}
+
+.header__cta {
+  margin-left: var(--space-2);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger__bar {
+  height: 2px;
+  background: var(--color-ink);
+  border-radius: 2px;
+  transition: transform var(--transition-base), opacity var(--transition-base);
+}
+
+.nav-abierto .hamburger__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-abierto .hamburger__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-abierto .hamburger__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
