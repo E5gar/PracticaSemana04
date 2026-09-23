@@ -926,3 +926,77 @@ address {
   font-size: 0.82rem;
   opacity: 0.75;
 }
+
+
+/* PARTE 13: RESPONSIVE */
+@media (max-width: 960px) {
+  .hero__grid,
+  .simulador__grid,
+  .nosotros__grid,
+  .reserva__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__image-wrap {
+    order: -1;
+  }
+
+  .pasos__lista {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .nav {
+    position: fixed;
+    inset: var(--nav-height) 0 auto 0;
+    background: var(--color-cream);
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--color-cream-soft);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform var(--transition-base), opacity var(--transition-base);
+  }
+
+  .nav-abierto .nav {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .header__cta {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .form-reserva {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
