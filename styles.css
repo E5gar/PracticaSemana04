@@ -748,7 +748,6 @@ p {
   font-size: 0.88rem;
 }
 
-
 /* PARTE 11: FORMULARIO DE RESERVA */
 .reserva {
   padding: var(--space-7) 0;
@@ -807,7 +806,9 @@ p {
   font-family: var(--font-body);
   font-size: 1rem;
   color: var(--color-ink);
-  transition: border-color var(--transition-base), background var(--transition-base);
+  transition:
+    border-color var(--transition-base),
+    background var(--transition-base);
 }
 
 .campo input:hover,
@@ -844,9 +845,84 @@ p {
 }
 
 .form-mensaje.exito {
-  color: #4B7A5A;
+  color: #4b7a5a;
 }
 
 .form-mensaje.error {
   color: var(--color-error);
+}
+
+/* PARTE 12: PIE DE PÁGINA */
+.site-footer {
+  background: var(--color-ink);
+  color: var(--color-cream-soft);
+  padding: var(--space-7) 0 var(--space-4);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.brand--footer .brand__mark {
+  background: var(--color-mustard);
+}
+
+.footer__col h3 {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--color-cream);
+  margin-bottom: var(--space-2);
+}
+
+.footer__col ul li {
+  margin-bottom: var(--space-1);
+}
+
+.footer__col a {
+  color: var(--color-cream-soft);
+  opacity: 0.85;
+  transition: opacity var(--transition-base);
+}
+
+.footer__col a:hover {
+  opacity: 1;
+  color: var(--color-mustard);
+}
+
+address {
+  font-style: normal;
+  opacity: 0.85;
+  line-height: 1.9;
+}
+
+.footer__social {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.footer__social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 1;
+}
+
+.footer__social a:hover {
+  background: var(--color-mustard);
+  color: var(--color-ink);
+  transform: translateY(-3px);
+}
+
+.footer__bottom {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.82rem;
+  opacity: 0.75;
 }
