@@ -257,6 +257,85 @@
           </div>
         </div>
       </section>
+      <section class="simulador" id="simulador" aria-labelledby="tituloSimulador">
+        <div class="wrap simulador__grid">
+          <div class="simulador__texto">
+            <h2 id="tituloSimulador" class="section__title">Así se mueve nuestra flota</h2>
+            <p class="section__lead">
+              Una animación interactiva (no es data real de GPS) que muestra cómo distribuimos los
+              vehículos disponibles por la ciudad a lo largo del día. Juega con los controles.
+            </p>
+
+            <div class="simulador__controles">
+              <button type="button" id="botonPausa" class="btn btn--primary btn--small">
+                Pausar
+              </button>
+              <button type="button" id="botonAgregar" class="btn btn--ghost btn--small">
+                + Vehículo
+              </button>
+              <button type="button" id="botonQuitar" class="btn btn--ghost btn--small">
+                − Vehículo
+              </button>
+
+              <label class="control-slider" for="controlVelocidad">
+                Velocidad
+                <input type="range" id="controlVelocidad" min="0.2" max="3" step="0.1" value="1" />
+              </label>
+
+              <div
+                class="control-swatches"
+                id="grupoColores"
+                role="group"
+                aria-label="Color de los vehículos en el simulador"
+              >
+                <button
+                  type="button"
+                  class="swatch is-active"
+                  data-color="sky"
+                  aria-pressed="true"
+                  aria-label="Color celeste"
+                ></button>
+                <button
+                  type="button"
+                  class="swatch"
+                  data-color="clay"
+                  aria-pressed="false"
+                  aria-label="Color arcilla"
+                ></button>
+                <button
+                  type="button"
+                  class="swatch"
+                  data-color="sage"
+                  aria-pressed="false"
+                  aria-label="Color salvia"
+                ></button>
+                <button
+                  type="button"
+                  class="swatch"
+                  data-color="mustard"
+                  aria-pressed="false"
+                  aria-label="Color mostaza"
+                ></button>
+              </div>
+            </div>
+
+            <p class="simulador__metricas">
+              <span><strong id="valorFps">0</strong> fps</span>
+              <span><strong id="valorParticulas">0</strong> vehículos en pantalla</span>
+            </p>
+          </div>
+
+          <div class="simulador__canvas-wrap">
+            <canvas
+              id="lienzoFlota"
+              width="640"
+              height="420"
+              role="img"
+              aria-label="Animación de vehículos moviéndose sobre un plano de la ciudad"
+            ></canvas>
+          </div>
+        </div>
+      </section>
     </main>
   </body>
 </html>
