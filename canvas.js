@@ -22,7 +22,7 @@ const PALETA_PARTICULAS = {
   sky: '#B8D8D8',
   clay: '#E8B4A8',
   sage: '#C3D8C5',
-  mustard: '#EAD6A7'
+  mustard: '#EAD6A7',
 };
 
 // PARTE 2: IIFE + CLOSURE PARA EL ESTADO DE LA ANIMACIÓN
@@ -52,7 +52,7 @@ const simuladorFlota = (() => {
     y: Math.random() * altoLienzo(),
     radio: 6 + Math.random() * 5,
     vx: (Math.random() - 0.5) * 90,
-    vy: (Math.random() - 0.5) * 90
+    vy: (Math.random() - 0.5) * 90,
   });
 
   const ajustarResolucion = () => {
@@ -187,7 +187,7 @@ const simuladorFlota = (() => {
     establecerVelocidad,
     establecerColor,
     ajustarResolucion,
-    estaEnEjecucion: () => enEjecucion
+    estaEnEjecucion: () => enEjecucion,
   };
 })();
 
@@ -281,19 +281,25 @@ window.addEventListener('resize', () => {
   temporizadorResize = setTimeout(() => simuladorFlota.ajustarResolucion(), 200);
 });
 
-const observadorVisibilidadLienzo = new IntersectionObserver((entradas) => {
-  entradas.forEach((entrada) => {
-    if (entrada.isIntersecting) {
-      if (!simuladorFlota.estaEnEjecucion() && !document.body.classList.contains('simulador-pausado-manual')) {
-        simuladorFlota.iniciar();
+const observadorVisibilidadLienzo = new IntersectionObserver(
+  (entradas) => {
+    entradas.forEach((entrada) => {
+      if (entrada.isIntersecting) {
+        if (
+          !simuladorFlota.estaEnEjecucion() &&
+          !document.body.classList.contains('simulador-pausado-manual')
+        ) {
+          simuladorFlota.iniciar();
+          actualizarBotonPausa();
+        }
+      } else {
+        simuladorFlota.detener();
         actualizarBotonPausa();
       }
-    } else {
-      simuladorFlota.detener();
-      actualizarBotonPausa();
-    }
-  });
-}, { threshold: 0.15 });
+    });
+  },
+  { threshold: 0.15 }
+);
 
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
@@ -318,4 +324,348 @@ window.addEventListener('beforeunload', () => {
   simuladorFlota.detener();
   observadorVisibilidadLienzo.disconnect();
   observadorSecciones.disconnect();
+});
+
+// PARTE 6: TALLER INTERACTIVO POR PASOS (TEMA VEHÍCULOS)
+const tallerCodigoPorPaso = {
+  1: {
+    titulo: 'Paso 1 · Tablero + Canvas',
+    contenido: `tallerBotonPlay1.addEventListener('click', () => {
+  const modelo = tallerInputModelo.value.trim() || 'Auto';
+  animarModeloEnCanvas(modelo);
+});`,
+  },
+  2: {
+    titulo: 'Paso 2 · IIFE + Closures',
+    contenido: `const contadorArranques = (() => {
+  let total = 0;
+  const arrancar = () => { total += 1; return total; };
+  const reiniciar = () => { total = 0; return total; };
+  return { arrancar, reiniciar };
+})();
+
+tallerBotonArrancar.addEventListener('click', () => {
+  tallerValorArranques.textContent = contadorArranques.arrancar();
+});`,
+  },
+  3: {
+    titulo: 'Paso 3 · DOM + Validación',
+    contenido: `tallerBotonLuces.addEventListener('click', () => {
+  tallerAutoIcono.classList.toggle('luces-encendidas');
+});
+
+tallerBotonPasajero.addEventListener('click', () => {
+  if (!tallerAutoIcono.classList.contains('luces-encendidas')) {
+    tallerErrorPaso3.textContent = 'Enc. las luces antes de subir pasajeros.';
+    return;
+  }
+  tallerErrorPaso3.textContent = '';
+});`,
+  },
+  4: {
+    titulo: 'Paso 4 · Canvas + requestAnimationFrame',
+    contenido: `const tick = () => {
+  contextoCarretera.clearRect(0, 0, tallerCanvas4.width, tallerCanvas4.height);
+  autosCarretera.forEach(auto => {
+    auto.x += auto.velocidad;
+    dibujarAuto(contextoCarretera, auto);
+  });
+  idFrameCarretera = requestAnimationFrame(tick);
+};
+
+tallerBotonIniciarCarretera.addEventListener('click', () => {
+  idFrameCarretera = requestAnimationFrame(tick);
+});`,
+  },
+  5: {
+    titulo: 'Paso 5 · Diagnóstico del vehículo',
+    contenido: `tallerBotonAnalizar.addEventListener('click', () => {
+  const memoria = performance.memory
+    ? (performance.memory.usedJSHeapSize / 1048576).toFixed(1)
+    : 'N/D';
+  tallerDashMemoria.textContent = memoria;
+});
+
+tallerBotonFugaSensor.addEventListener('click', () => {
+  fugaSensores.push(new Array(50000).fill('sensor'));
+});`,
+  },
+};
+
+const tallerControladorPasos = (() => {
+  const pasosAbiertos = new Set();
+  const estaAbierto = (numero) => pasosAbiertos.has(numero);
+  const abrir = (numero) => pasosAbiertos.add(numero);
+  const cerrar = (numero) => pasosAbiertos.delete(numero);
+  return { estaAbierto, abrir, cerrar };
+})();
+
+const tallerContenedorCodigo = document.getElementById('tallerContenedorCodigo');
+
+const tallerConstruirBloqueCodigo = (numero) => {
+  const bloque = document.createElement('div');
+  bloque.className = 'taller-bloque-codigo';
+  bloque.id = `tallerBloqueCodigo${numero}`;
+
+  const titulo = document.createElement('div');
+  titulo.className = 'taller-bloque-codigo-titulo';
+  titulo.textContent = tallerCodigoPorPaso[numero].titulo;
+
+  const pre = document.createElement('pre');
+  pre.textContent = tallerCodigoPorPaso[numero].contenido;
+
+  bloque.appendChild(titulo);
+  bloque.appendChild(pre);
+  return bloque;
+};
+
+const tallerInsertarBloqueEnOrden = (numero) => {
+  const existente = document.getElementById(`tallerBloqueCodigo${numero}`);
+  if (existente) return existente;
+
+  const nuevoBloque = tallerConstruirBloqueCodigo(numero);
+  const bloquesActuales = Array.from(tallerContenedorCodigo.children);
+  const siguiente = bloquesActuales.find(
+    (b) => Number(b.id.replace('tallerBloqueCodigo', '')) > numero
+  );
+
+  if (siguiente) {
+    tallerContenedorCodigo.insertBefore(nuevoBloque, siguiente);
+  } else {
+    tallerContenedorCodigo.appendChild(nuevoBloque);
+  }
+  return nuevoBloque;
+};
+
+const tallerResaltarYDesplazar = (bloque) => {
+  document
+    .querySelectorAll('.taller-bloque-codigo')
+    .forEach((b) => b.classList.remove('resaltado'));
+  bloque.classList.add('resaltado');
+  bloque.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+document.querySelectorAll('.taller-toggle').forEach((boton) => {
+  boton.addEventListener('click', () => {
+    const numero = Number(boton.dataset.tallerPaso);
+    const panel = document.getElementById(`tallerPanel${numero}`);
+    const abierto = tallerControladorPasos.estaAbierto(numero);
+
+    if (abierto) {
+      tallerControladorPasos.cerrar(numero);
+      panel.classList.remove('is-abierto');
+      boton.classList.remove('is-activo');
+    } else {
+      tallerControladorPasos.abrir(numero);
+      panel.classList.add('is-abierto');
+      boton.classList.add('is-activo');
+      const bloque = tallerInsertarBloqueEnOrden(numero);
+      tallerResaltarYDesplazar(bloque);
+    }
+  });
+});
+
+// PASO 1: TABLERO + CANVAS
+const tallerCanvas1 = document.getElementById('tallerCanvas1');
+const tallerContexto1 = tallerCanvas1.getContext('2d');
+const tallerInputModelo = document.getElementById('tallerInputModelo');
+const tallerBotonPlay1 = document.getElementById('tallerBotonPlay1');
+const tallerBotonLimpiar1 = document.getElementById('tallerBotonLimpiar1');
+const tallerBotonMotor1 = document.getElementById('tallerBotonMotor1');
+let tallerAngulo1 = 0;
+let tallerIdFrame1 = null;
+
+const animarModeloEnCanvas = (texto) => {
+  if (tallerIdFrame1) cancelAnimationFrame(tallerIdFrame1);
+
+  const dibujar = () => {
+    tallerContexto1.clearRect(0, 0, tallerCanvas1.width, tallerCanvas1.height);
+    tallerContexto1.save();
+    tallerContexto1.translate(tallerCanvas1.width / 2, tallerCanvas1.height / 2);
+    const escala = 1 + Math.sin(tallerAngulo1) * 0.12;
+    tallerContexto1.scale(escala, escala);
+    tallerContexto1.fillStyle = '#3e3a39';
+    tallerContexto1.font = 'bold 40px Georgia, serif';
+    tallerContexto1.textAlign = 'center';
+    tallerContexto1.textBaseline = 'middle';
+    tallerContexto1.fillText(texto, 0, 0);
+    tallerContexto1.restore();
+    tallerAngulo1 += 0.06;
+    tallerIdFrame1 = requestAnimationFrame(dibujar);
+  };
+  dibujar();
+};
+
+tallerBotonPlay1.addEventListener('click', () => {
+  const modelo = tallerInputModelo.value.trim() || 'Auto';
+  animarModeloEnCanvas(modelo);
+});
+tallerBotonLimpiar1.addEventListener('click', () => {
+  if (tallerIdFrame1) cancelAnimationFrame(tallerIdFrame1);
+  tallerContexto1.clearRect(0, 0, tallerCanvas1.width, tallerCanvas1.height);
+});
+tallerBotonMotor1.addEventListener('click', () => {
+  animarModeloEnCanvas('Motor encendido');
+});
+
+// PASO 2: CONTADOR DE ARRANQUES
+const tallerValorArranques = document.getElementById('tallerValorArranques');
+const tallerBotonArrancar = document.getElementById('tallerBotonArrancar');
+const tallerBotonReiniciarContador = document.getElementById('tallerBotonReiniciarContador');
+
+const contadorArranques = (() => {
+  let total = 0;
+  const arrancar = () => {
+    total += 1;
+    return total;
+  };
+  const reiniciar = () => {
+    total = 0;
+    return total;
+  };
+  return { arrancar, reiniciar };
+})();
+
+tallerBotonArrancar.addEventListener('click', () => {
+  tallerValorArranques.textContent = String(contadorArranques.arrancar());
+});
+tallerBotonReiniciarContador.addEventListener('click', () => {
+  tallerValorArranques.textContent = String(contadorArranques.reiniciar());
+});
+
+// PASO 3: LUCES, BOCINA Y RESET
+const tallerAutoIcono = document.getElementById('tallerAutoIcono');
+const tallerErrorPaso3 = document.getElementById('tallerErrorPaso3');
+const tallerBotonLuces = document.getElementById('tallerBotonLuces');
+const tallerBotonPasajero = document.getElementById('tallerBotonPasajero');
+const tallerBotonBocina = document.getElementById('tallerBotonBocina');
+const tallerBotonResetAuto = document.getElementById('tallerBotonResetAuto');
+
+tallerBotonLuces.addEventListener('click', () => {
+  tallerAutoIcono.classList.toggle('luces-encendidas');
+  tallerErrorPaso3.textContent = '';
+});
+tallerBotonPasajero.addEventListener('click', () => {
+  if (!tallerAutoIcono.classList.contains('luces-encendidas')) {
+    tallerErrorPaso3.textContent = 'Encien las luces antes de subir pasajeros.';
+    return;
+  }
+  tallerErrorPaso3.textContent = '';
+  tallerAutoIcono.style.width = tallerAutoIcono.offsetWidth + 10 + 'px';
+});
+tallerBotonBocina.addEventListener('click', () => {
+  tallerAutoIcono.classList.add('pulso-bocina');
+  setTimeout(() => tallerAutoIcono.classList.remove('pulso-bocina'), 400);
+});
+tallerBotonResetAuto.addEventListener('click', () => {
+  tallerAutoIcono.classList.remove('luces-encendidas', 'pulso-bocina');
+  tallerAutoIcono.style.width = '';
+  tallerErrorPaso3.textContent = '';
+});
+
+// PASO 4: CARRETERA CON AUTOS EN CANVAS
+const tallerCanvas4 = document.getElementById('tallerCanvas4');
+const contextoCarretera = tallerCanvas4.getContext('2d');
+const tallerValorFpsCarretera = document.getElementById('tallerValorFpsCarretera');
+
+let autosCarretera = [
+  { x: 20, carril: 60, velocidad: 2.2 },
+  { x: 200, carril: 130, velocidad: 1.6 },
+];
+let idFrameCarretera = null;
+let tallerUltimoTs = 0;
+let tallerCuadros = 0;
+let tallerTiempoFps = 0;
+
+const dibujarAuto = (contexto, auto) => {
+  contexto.fillStyle = '#e8b4a8';
+  contexto.fillRect(auto.x, auto.carril, 40, 18);
+  contexto.fillStyle = '#3e3a39';
+  contexto.beginPath();
+  contexto.arc(auto.x + 8, auto.carril + 18, 5, 0, Math.PI * 2);
+  contexto.arc(auto.x + 32, auto.carril + 18, 5, 0, Math.PI * 2);
+  contexto.fill();
+};
+
+const tallerTickCarretera = (ts) => {
+  if (!tallerUltimoTs) tallerUltimoTs = ts;
+  const dt = (ts - tallerUltimoTs) / 1000;
+  tallerUltimoTs = ts;
+
+  contextoCarretera.clearRect(0, 0, tallerCanvas4.width, tallerCanvas4.height);
+  autosCarretera.forEach((auto) => {
+    auto.x += auto.velocidad;
+    if (auto.x > tallerCanvas4.width) auto.x = -40;
+    dibujarAuto(contextoCarretera, auto);
+  });
+
+  tallerCuadros += 1;
+  tallerTiempoFps += dt;
+  if (tallerTiempoFps >= 0.5) {
+    tallerValorFpsCarretera.textContent = String(Math.round(tallerCuadros / tallerTiempoFps));
+    tallerCuadros = 0;
+    tallerTiempoFps = 0;
+  }
+
+  idFrameCarretera = requestAnimationFrame(tallerTickCarretera);
+};
+
+document.getElementById('tallerBotonIniciarCarretera').addEventListener('click', () => {
+  if (idFrameCarretera) return;
+  tallerUltimoTs = 0;
+  idFrameCarretera = requestAnimationFrame(tallerTickCarretera);
+});
+document.getElementById('tallerBotonDetenerCarretera').addEventListener('click', () => {
+  if (idFrameCarretera) cancelAnimationFrame(idFrameCarretera);
+  idFrameCarretera = null;
+});
+document.getElementById('tallerBotonAgregarAuto').addEventListener('click', () => {
+  autosCarretera.push({
+    x: -40,
+    carril: 30 + Math.random() * 160,
+    velocidad: 1 + Math.random() * 2,
+  });
+});
+
+// PASO 5: DIAGNÓSTICO DEL VEHÍCULO
+const tallerDashFps = document.getElementById('tallerDashFps');
+const tallerDashMemoria = document.getElementById('tallerDashMemoria');
+const tallerDashListeners = document.getElementById('tallerDashListeners');
+const tallerResultadoDiagnostico = document.getElementById('tallerResultadoDiagnostico');
+
+let tallerContadorListeners = 0;
+const tallerAddEventListenerOriginal = EventTarget.prototype.addEventListener;
+EventTarget.prototype.addEventListener = function (...args) {
+  tallerContadorListeners += 1;
+  tallerDashListeners.textContent = String(tallerContadorListeners);
+  return tallerAddEventListenerOriginal.apply(this, args);
+};
+
+setInterval(() => {
+  tallerDashFps.textContent = tallerValorFpsCarretera.textContent;
+}, 500);
+
+let fugaSensores = [];
+
+document.getElementById('tallerBotonAnalizar').addEventListener('click', () => {
+  const memoriaDisponible = 'memory' in performance;
+  const memoriaMb = memoriaDisponible
+    ? (performance.memory.usedJSHeapSize / 1048576).toFixed(1)
+    : (fugaSensores.length * 0.8).toFixed(1);
+  tallerDashMemoria.textContent = memoriaMb;
+  tallerResultadoDiagnostico.textContent = memoriaDisponible
+    ? 'Lectura real de performance.memory disponible en este navegador.'
+    : 'Este navegador no expone performance.memory; se muestra una estimación.';
+});
+
+document.getElementById('tallerBotonFugaSensor').addEventListener('click', () => {
+  fugaSensores.push(new Array(50000).fill('sensor'));
+  tallerDashMemoria.textContent = (fugaSensores.length * 0.4).toFixed(1);
+  tallerResultadoDiagnostico.textContent = `Lecturas de sensor retenidas: ${fugaSensores.length}.`;
+});
+
+document.getElementById('tallerBotonLimpiarFuga').addEventListener('click', () => {
+  fugaSensores = [];
+  tallerDashMemoria.textContent = '0';
+  tallerResultadoDiagnostico.textContent = 'Buffer de sensores liberado.';
 });
