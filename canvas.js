@@ -114,6 +114,8 @@ const simuladorFlota = (() => {
 
   const tick = (marcaTiempo) => {
     if (!ultimoTimestamp) ultimoTimestamp = marcaTiempo;
+    // Uso de IA Claude Sonnet 5 para la Optimización de cálculo de Delta Time (dt)
+    // y así evitar saltos de animación al cambiar de pestaña
     const dt = (marcaTiempo - ultimoTimestamp) / 1000;
     ultimoTimestamp = marcaTiempo;
 
@@ -545,21 +547,23 @@ tallerBotonLuces.addEventListener('click', () => {
   tallerAutoIcono.classList.toggle('luces-encendidas');
   tallerErrorPaso3.textContent = '';
 });
+
 tallerBotonPasajero.addEventListener('click', () => {
   if (!tallerAutoIcono.classList.contains('luces-encendidas')) {
-    tallerErrorPaso3.textContent = 'Encien las luces antes de subir pasajeros.';
+    tallerErrorPaso3.textContent = 'Enciende las luces antes de subir pasajeros.';
     return;
   }
   tallerErrorPaso3.textContent = '';
-  tallerAutoIcono.style.width = tallerAutoIcono.offsetWidth + 10 + 'px';
+  tallerAutoIcono.classList.toggle('con-pasajero');
 });
+
 tallerBotonBocina.addEventListener('click', () => {
   tallerAutoIcono.classList.add('pulso-bocina');
   setTimeout(() => tallerAutoIcono.classList.remove('pulso-bocina'), 400);
 });
+
 tallerBotonResetAuto.addEventListener('click', () => {
-  tallerAutoIcono.classList.remove('luces-encendidas', 'pulso-bocina');
-  tallerAutoIcono.style.width = '';
+  tallerAutoIcono.classList.remove('luces-encendidas', 'pulso-bocina', 'con-pasajero');
   tallerErrorPaso3.textContent = '';
 });
 
@@ -607,7 +611,9 @@ const tallerTickCarretera = (ts) => {
   tallerCuadros += 1;
   tallerTiempoFps += dt;
   if (tallerTiempoFps >= 0.5) {
-    tallerValorFpsCarretera.textContent = String(Math.round(tallerCuadros / tallerTiempoFps));
+    const fpsCalculado = String(Math.round(tallerCuadros / tallerTiempoFps));
+    tallerValorFpsCarretera.textContent = fpsCalculado;
+    if (tallerDashFps) tallerDashFps.textContent = fpsCalculado;
     tallerCuadros = 0;
     tallerTiempoFps = 0;
   }
@@ -645,10 +651,6 @@ EventTarget.prototype.addEventListener = function (...args) {
   tallerDashListeners.textContent = String(tallerContadorListeners);
   return tallerAddEventListenerOriginal.apply(this, args);
 };
-
-setInterval(() => {
-  tallerDashFps.textContent = tallerValorFpsCarretera.textContent;
-}, 500);
 
 let fugaSensores = [];
 

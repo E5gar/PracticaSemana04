@@ -1332,3 +1332,7 @@ address {
     max-height: none;
   }
 }
+
+.taller-auto-icono.con-pasajero {
+  width: 170px;
+}
