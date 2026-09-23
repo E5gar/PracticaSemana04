@@ -435,6 +435,95 @@
           </div>
         </div>
       </section>
+      <section class="reserva" id="contacto" aria-labelledby="tituloReserva">
+        <div class="wrap reserva__grid">
+          <div class="reserva__intro">
+            <h2 id="tituloReserva" class="section__title">Reserva tu vehículo</h2>
+            <p class="section__lead">
+              Completa tus datos y fechas. Te confirmamos disponibilidad el mismo día.
+            </p>
+            <p class="reserva__nota">
+              Todos los campos marcados con <span aria-hidden="true">*</span> son obligatorios.
+            </p>
+          </div>
+
+          <form class="form-reserva" id="formularioReserva" novalidate>
+            <div class="campo">
+              <label for="campoNombre">Nombre completo *</label>
+              <input
+                type="text"
+                id="campoNombre"
+                name="nombre"
+                autocomplete="name"
+                required
+                minlength="3"
+              />
+              <p class="campo__error" id="errorNombre" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="campoEmail">Correo electrónico *</label>
+              <input type="email" id="campoEmail" name="email" autocomplete="email" required />
+              <p class="campo__error" id="errorEmail" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="campoTelefono">Teléfono *</label>
+              <input
+                type="tel"
+                id="campoTelefono"
+                name="telefono"
+                autocomplete="tel"
+                placeholder="9XXXXXXXX"
+                required
+              />
+              <p class="campo__error" id="errorTelefono" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="campoVehiculo">Tipo de vehículo *</label>
+              <select id="campoVehiculo" name="vehiculo" required>
+                <option value="">Selecciona una opción</option>
+                <option value="economico">Económico</option>
+                <option value="sedan">Sedán</option>
+                <option value="suv">SUV</option>
+                <option value="camioneta">Camioneta 4x4</option>
+              </select>
+              <p class="campo__error" id="errorVehiculo" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="campoInicio">Fecha de recojo *</label>
+              <input type="date" id="campoInicio" name="fechaInicio" required />
+              <p class="campo__error" id="errorInicio" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="campoFin">Fecha de devolución *</label>
+              <input type="date" id="campoFin" name="fechaFin" required />
+              <p class="campo__error" id="errorFin" role="alert"></p>
+            </div>
+
+            <div class="campo campo--completo">
+              <label for="campoMensaje">Cuéntanos tu ruta (opcional)</label>
+              <textarea id="campoMensaje" name="mensaje" rows="3"></textarea>
+            </div>
+
+            <div class="campo campo--completo campo--checkbox">
+              <input type="checkbox" id="campoTerminos" name="terminos" required />
+              <label for="campoTerminos">Acepto los términos y condiciones del servicio *</label>
+              <p class="campo__error" id="errorTerminos" role="alert"></p>
+            </div>
+
+            <div class="campo campo--completo">
+              <button type="submit" class="btn btn--primary" id="botonEnviar">
+                Enviar solicitud
+              </button>
+              <p class="form-mensaje" id="mensajeFormulario" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </section>
     </main>
   </body>
 </html>
