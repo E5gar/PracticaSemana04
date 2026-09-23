@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tienda de Renta de Vehículos</title>
+    <meta
+      name="description"
+      content="Alquiler de autos, SUVs y camionetas en Huancayo. Entrega en cualquier lugar, con seguro incluido y kilometraje libre."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="canvas.js" defer></script>
+    <script src="reservas.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header" id="topeHeader">
+      <div class="wrap header__inner">
+        <a href="#inicio" class="brand">
+          <span class="brand__mark">AH</span>
+          <span class="brand__text">AutoRenta <em>Huancayo</em></span>
+        </a>
+
+        <nav class="nav" id="navPrincipal">
+          <ul class="nav__list">
+            <li><a href="#inicio" class="nav__link is-active">Inicio</a></li>
+            <li><a href="#vehiculos" class="nav__link">Vehículos</a></li>
+            <li><a href="#simulador" class="nav__link">Flota en vivo</a></li>
+            <li><a href="#servicios" class="nav__link">Servicios</a></li>
+            <li><a href="#nosotros" class="nav__link">Nosotros</a></li>
+            <li><a href="#contacto" class="nav__link">Contacto</a></li>
+          </ul>
+        </nav>
+
+        <a href="#contacto" class="btn btn--primary btn--small header__cta">Reservar ahora</a>
+
+        <button
+          type="button"
+          class="hamburger"
+          id="botonHamburguesa"
+          aria-expanded="false"
+          aria-controls="navPrincipal"
+          aria-label="Abrir menú de navegación"
+        >
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+        </button>
+      </div>
+    </header>
+    <main>
+      <section class="hero" id="inicio">
+        <div class="wrap hero__grid">
+          <div class="hero__content">
+            <p class="hero__kicker">Renta de vehículos en Huancayo</p>
+            <h1 class="hero__title">¡Recorre el Valle del Mantaro!</h1>
+            <p class="hero__subtitle">
+              Autos, SUVs y camionetas en Huancayo, con entrega en cualquier lugar y en nuestra
+              oficina en el centro. Seguro incluido y kilometraje libre para recorrer sin sorpresas
+              en su cuenta final.
+            </p>
+            <div class="hero__actions">
+              <a href="#vehiculos" class="btn btn--primary">Ver vehículos disponibles</a>
+              <a href="#contacto" class="btn btn--ghost">Cotizar mi viaje</a>
+            </div>
+            <dl class="hero__stats">
+              <div class="hero__stat">
+                <dt>Vehículos en flota</dt>
+                <dd>+50</dd>
+              </div>
+              <div class="hero__stat">
+                <dt>Años en Huancayo</dt>
+                <dd>+8</dd>
+              </div>
+              <div class="hero__stat">
+                <dt>Entrega</dt>
+                <dd>Mismo día</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="hero__image-wrap">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/2019_Toyota_Hilux_Double_Cab_2.4_L-Edition_4x4_(34).jpg?width=960"
+              alt="Auto listo para un viaje por el Valle del Mantaro cerca de Huancayo"
+              width="860"
+              height="720"
+              loading="eager"
+            />
+          </div>
+        </div>
+      </section>
+      <section class="pasos" aria-labelledby="tituloPasos">
+        <div class="wrap">
+          <h2 id="tituloPasos" class="section__title">Cómo funciona</h2>
+          <ol class="pasos__lista">
+            <li class="paso">
+              <span class="paso__numero">1</span>
+              <h3>Elige tu vehículo</h3>
+              <p>Compara modelo, potencia y precio por día según tu ruta.</p>
+            </li>
+            <li class="paso">
+              <span class="paso__numero">2</span>
+              <h3>Reserva en línea</h3>
+              <p>Completa el formulario con tus datos de contacto.</p>
+            </li>
+            <li class="paso">
+              <span class="paso__numero">3</span>
+              <h3>Recibe las llaves</h3>
+              <p>Te lo entregamos el mismo día.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+      <section class="flota" id="vehiculos" aria-labelledby="tituloFlota">
+        <div class="wrap">
+          <h2 id="tituloFlota" class="section__title">Nuestra flota</h2>
+          <p class="section__lead">
+            Cuatro categorías pensadas para la ciudad y para salir de ruta por Junín.
+          </p>
+
+          <div class="flota__grid">
+            <article class="auto-card">
+              <div class="auto-card__image-wrap">
+                <img
+                  src="https://commons.wikimedia.org/wiki/Special:FilePath/Toyota_Yaris_Hybrid_(XP210)_1X7A0353.jpg?width=500"
+                  alt="Toyota Yaris disponible para alquiler en Huancayo"
+                  width="480"
+                  height="360"
+                  loading="lazy"
+                />
+                <button
+                  type="button"
+                  class="favorito"
+                  data-favorito
+                  aria-pressed="false"
+                  aria-label="Marcar Toyota Yaris como favorito"
+                >
+                  ♥
+                </button>
+              </div>
+              <div class="auto-card__body">
+                <span class="badge">Económico</span>
+                <h3>Toyota Yaris</h3>
+                <ul class="auto-card__specs">
+                  <li>5 pasajeros</li>
+                  <li>Manual</li>
+                  <li>Gasolina</li>
+                </ul>
+                <div class="auto-card__footer">
+                  <p class="precio"><strong>S/ 120</strong> / día</p>
+                  <a href="#contacto" class="btn btn--primary btn--small">Reservar</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="auto-card">
+              <div class="auto-card__image-wrap">
+                <img
+                  src="https://commons.wikimedia.org/wiki/Special:FilePath/2006_Hyundai_Accent_(MC)_sedan_(2015-07-14)_02.jpg?width=500"
+                  alt="Hyundai Accent disponible para alquiler en Huancayo"
+                  width="480"
+                  height="360"
+                  loading="lazy"
+                />
+                <button
+                  type="button"
+                  class="favorito"
+                  data-favorito
+                  aria-pressed="false"
+                  aria-label="Marcar Hyundai Accent como favorito"
+                >
+                  ♥
+                </button>
+              </div>
+              <div class="auto-card__body">
+                <span class="badge">Sedán</span>
+                <h3>Hyundai Accent</h3>
+                <ul class="auto-card__specs">
+                  <li>5 pasajeros</li>
+                  <li>Automático</li>
+                  <li>Gasolina</li>
+                </ul>
+                <div class="auto-card__footer">
+                  <p class="precio"><strong>S/ 150</strong> / día</p>
+                  <a href="#contacto" class="btn btn--primary btn--small">Reservar</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="auto-card">
+              <div class="auto-card__image-wrap">
+                <img
+                  src="https://commons.wikimedia.org/wiki/Special:FilePath/Kia_Sportage_(NQ5)_1X7A0326.jpg?width=500"
+                  alt="Kia Sportage disponible para alquiler en Huancayo"
+                  width="480"
+                  height="360"
+                  loading="lazy"
+                />
+                <button
+                  type="button"
+                  class="favorito"
+                  data-favorito
+                  aria-pressed="false"
+                  aria-label="Marcar Kia Sportage como favorito"
+                >
+                  ♥
+                </button>
+              </div>
+              <div class="auto-card__body">
+                <span class="badge">SUV</span>
+                <h3>Kia Sportage</h3>
+                <ul class="auto-card__specs">
+                  <li>5 pasajeros</li>
+                  <li>Automático</li>
+                  <li>GLP / Gasolina</li>
+                </ul>
+                <div class="auto-card__footer">
+                  <p class="precio"><strong>S/ 220</strong> / día</p>
+                  <a href="#contacto" class="btn btn--primary btn--small">Reservar</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="auto-card">
+              <div class="auto-card__image-wrap">
+                <img
+                  src="https://commons.wikimedia.org/wiki/Special:FilePath/2019_Toyota_Hilux_Double_Cab_2.4_L-Edition_4x4_(11).jpg?width=500"
+                  alt="Toyota Hilux 4x4 disponible para alquiler en Huancayo"
+                  width="480"
+                  height="360"
+                  loading="lazy"
+                />
+                <button
+                  type="button"
+                  class="favorito"
+                  data-favorito
+                  aria-pressed="false"
+                  aria-label="Marcar Toyota Hilux como favorito"
+                >
+                  ♥
+                </button>
+              </div>
+              <div class="auto-card__body">
+                <span class="badge">Camioneta 4x4</span>
+                <h3>Toyota Hilux</h3>
+                <ul class="auto-card__specs">
+                  <li>5 pasajeros</li>
+                  <li>Manual</li>
+                  <li>Diésel · 4x4</li>
+                </ul>
+                <div class="auto-card__footer">
+                  <p class="precio"><strong>S/ 280</strong> / día</p>
+                  <a href="#contacto" class="btn btn--primary btn--small">Reservar</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="simulador" id="simulador" aria-labelledby="tituloSimulador">
+        <div class="wrap simulador__grid">
+          <div class="simulador__texto">
+            <h2 id="tituloSimulador" class="section__title">Así se mueve nuestra flota</h2>
+            <p class="section__lead">
+              Una animación interactiva que muestra cómo distribuimos los vehículos disponibles por
+              la ciudad a lo largo del día. Juega con los controles.
+            </p>
+
+            <div class="simulador__controles">
+              <button type="button" id="botonPausa" class="btn btn--primary btn--small">
+                Pausar
+              </button>
+              <button type="button" id="botonAgregar" class="btn btn--ghost btn--small">
+                + Vehículo
+              </button>
+              <button type="button" id="botonQuitar" class="btn btn--ghost btn--small">
+                − Vehículo
+              </button>
+
+              <label class="control-slider" for="controlVelocidad">
+                Velocidad
+                <input type="range" id="controlVelocidad" min="0.2" max="3" step="0.1" value="1" />
+              </label>
+
+              <div
+                class="control-swatches"
+                id="grupoColores"
+                role="group"
+                aria-label="Color de los vehículos en el simulador"
+              >
+                <button
+                  type="button"
+                  class="swatch is-active"
+                  data-color="sky"
+                  aria-pressed="true"
+                  aria-label="Color celeste"
+                ></button>
+                <button
+                  type="button"
+                  class="swatch"
+                  data-color="clay"
+                  aria-pressed="false"
+                  aria-label="Color arcilla"
+                ></button>
+                <button
+                  type="button"
+                  class="swatch"
+                  data-color="sage"
+                  aria-pressed="false"
+                  aria-label="Color salvia"
+                ></button>
+                <button
+                  type="button"
+                  class="swatch"
+                  data-color="mustard"
+                  aria-pressed="false"
+                  aria-label="Color mostaza"
+                ></button>
+              </div>
+            </div>
+
+            <p class="simulador__metricas">
+              <span><strong id="valorFps">0</strong> fps</span>
+              <span><strong id="valorParticulas">0</strong> vehículos en pantalla</span>
+            </p>
+          </div>
+
+          <div class="simulador__canvas-wrap">
+            <canvas
+              id="lienzoFlota"
+              width="640"
+              height="420"
+              role="img"
+              aria-label="Animación de vehículos moviéndose sobre un plano de la ciudad"
+            ></canvas>
+          </div>
+        </div>
+      </section>
+      <section class="taller-interactivo" id="tallerInteractivo" aria-labelledby="tituloTaller">
+        <div class="wrap">
+          <h2 id="tituloTaller" class="section__title">
+            Bajo el capó: cómo armamos este simulador
+          </h2>
+          <p class="section__lead">
+            Activa cada paso del taller para ver, en vivo, la pieza de código que mueve a nuestra
+            flota virtual. A la derecha se va mostrando el bloque correspondiente.
+          </p>
+
+          <div class="taller-container">
+            <div class="taller-columna">
+              <button type="button" class="taller-toggle" data-taller-paso="1">
+                <span class="taller-num">1</span>
+                Tablero + Canvas: escribe el modelo de tu auto
+                <span class="taller-flecha">▸</span>
+              </button>
+              <div class="taller-panel" id="tallerPanel1" data-taller-panel="1">
+                <div class="taller-panel-inner">
+                  <div class="taller-controles-fila">
+                    <input
+                      type="text"
+                      id="tallerInputModelo"
+                      placeholder="Ej: Hilux, Yaris, Sportage..."
+                    />
+                    <button type="button" class="btn btn--primary" id="tallerBotonPlay1">
+                      ▶ Play
+                    </button>
+                    <button type="button" class="btn btn--ghost" id="tallerBotonLimpiar1">
+                      Limpiar
+                    </button>
+                    <button type="button" class="btn btn--motor3d" id="tallerBotonMotor1">
+                      Encender motor
+                    </button>
+                  </div>
+                  <canvas
+                    id="tallerCanvas1"
+                    width="600"
+                    height="200"
+                    role="img"
+                    aria-label="Modelo de vehículo animado en el tablero"
+                  ></canvas>
+                </div>
+              </div>
+
+              <button type="button" class="taller-toggle" data-taller-paso="2">
+                <span class="taller-num">2</span>
+                IIFE + Closures: contador de arranques del motor
+                <span class="taller-flecha">▸</span>
+              </button>
+              <div class="taller-panel" id="tallerPanel2" data-taller-panel="2">
+                <div class="taller-panel-inner">
+                  <p class="taller-contador-display">
+                    <strong id="tallerValorArranques">0</strong> arranques
+                  </p>
+                  <div class="taller-controles-fila">
+                    <button type="button" class="btn btn--primary" id="tallerBotonArrancar">
+                      🔑 Arrancar
+                    </button>
+                    <button type="button" class="btn btn--ghost" id="tallerBotonReiniciarContador">
+                      Reiniciar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" class="taller-toggle" data-taller-paso="3">
+                <span class="taller-num">3</span>
+                DOM + Validación: luces, bocina y reset
+                <span class="taller-flecha">▸</span>
+              </button>
+              <div class="taller-panel" id="tallerPanel3" data-taller-panel="3">
+                <div class="taller-panel-inner">
+                  <div class="taller-auto-icono" id="tallerAutoIcono">
+                    <span class="taller-auto-faro taller-auto-faro--izq"></span>
+                    <span class="taller-auto-faro taller-auto-faro--der"></span>
+                    <span class="taller-auto-rueda taller-auto-rueda--izq"></span>
+                    <span class="taller-auto-rueda taller-auto-rueda--der"></span>
+                  </div>
+                  <p class="taller-error" id="tallerErrorPaso3"></p>
+                  <div class="taller-controles-fila">
+                    <button type="button" class="btn btn--primary" id="tallerBotonLuces">
+                      Luces
+                    </button>
+                    <button type="button" class="btn btn--sage" id="tallerBotonPasajero">
+                      + Pasajero
+                    </button>
+                    <button type="button" class="btn btn--motor3d" id="tallerBotonBocina">
+                      Bocina
+                    </button>
+                    <button type="button" class="btn btn--ghost" id="tallerBotonResetAuto">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" class="taller-toggle" data-taller-paso="4">
+                <span class="taller-num">4</span>
+                Canvas API + requestAnimationFrame: carretera con autos
+                <span class="taller-flecha">▸</span>
+              </button>
+              <div class="taller-panel" id="tallerPanel4" data-taller-panel="4">
+                <div class="taller-panel-inner">
+                  <canvas
+                    id="tallerCanvas4"
+                    width="600"
+                    height="220"
+                    role="img"
+                    aria-label="Autos circulando por una carretera animada"
+                  ></canvas>
+                  <div class="taller-controles-fila">
+                    <button type="button" class="btn btn--primary" id="tallerBotonIniciarCarretera">
+                      Iniciar animación
+                    </button>
+                    <button type="button" class="btn btn--ghost" id="tallerBotonDetenerCarretera">
+                      Detener
+                    </button>
+                    <button type="button" class="btn btn--sage" id="tallerBotonAgregarAuto">
+                      + Auto
+                    </button>
+                    <label class="taller-slider" for="tallerSliderVelocidad">
+                      Velocidad
+                      <input
+                        type="range"
+                        id="tallerSliderVelocidad"
+                        min="0.2"
+                        max="3"
+                        step="0.1"
+                        value="1"
+                      />
+                    </label>
+                  </div>
+                  <p class="taller-metricas">
+                    <span><strong id="tallerValorFpsCarretera">0</strong> fps</span>
+                  </p>
+                </div>
+              </div>
+
+              <button type="button" class="taller-toggle" data-taller-paso="5">
+                <span class="taller-num">5</span>
+                Diagnóstico del vehículo: rendimiento y memoria
+                <span class="taller-flecha">▸</span>
+              </button>
+              <div class="taller-panel" id="tallerPanel5" data-taller-panel="5">
+                <div class="taller-panel-inner">
+                  <div class="taller-dashboard-grid">
+                    <div class="taller-dashboard-tile">
+                      <span>FPS</span><strong id="tallerDashFps">0</strong>
+                    </div>
+                    <div class="taller-dashboard-tile">
+                      <span>Memoria MB</span><strong id="tallerDashMemoria">0</strong>
+                    </div>
+                    <div class="taller-dashboard-tile">
+                      <span>Sensores activos</span><strong id="tallerDashListeners">0</strong>
+                    </div>
+                  </div>
+                  <div class="taller-controles-fila">
+                    <button type="button" class="btn btn--primary" id="tallerBotonAnalizar">
+                      Analizar rendimiento
+                    </button>
+                    <button type="button" class="btn btn--ghost" id="tallerBotonFugaSensor">
+                      Simular fuga de sensor
+                    </button>
+                    <button type="button" class="btn btn--sage" id="tallerBotonLimpiarFuga">
+                      Limpieza
+                    </button>
+                  </div>
+                  <p class="taller-metricas" id="tallerResultadoDiagnostico"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="taller-codigo-columna">
+              <h3>Código del taller</h3>
+              <div id="tallerContenedorCodigo"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="servicios" id="servicios" aria-labelledby="tituloServicios">
+        <div class="wrap">
+          <h2 id="tituloServicios" class="section__title">Lo que incluye cada renta</h2>
+          <div class="servicios__grid">
+            <article class="servicio-card">
+              <span class="icono icono--escudo" aria-hidden="true"></span>
+              <h3>Seguro todo riesgo</h3>
+              <p>Incluido en cada contrato, sin costos ocultos ni letras pequeñas.</p>
+            </article>
+
+            <article class="servicio-card">
+              <span class="icono icono--reloj" aria-hidden="true"></span>
+              <h3>Asistencia 24/7</h3>
+              <p>Soporte en carretera en cualquier punto de Junín, a cualquier hora.</p>
+            </article>
+
+            <article class="servicio-card">
+              <span class="icono icono--pin" aria-hidden="true"></span>
+              <h3>Entrega donde estés</h3>
+              <p>Aeropuerto de Jauja, tu hotel en Huancayo o nuestra oficina central.</p>
+            </article>
+
+            <article class="servicio-card">
+              <span class="icono icono--infinito" aria-hidden="true"></span>
+              <h3>Kilometraje libre</h3>
+              <p>Recorre Concepción, Jauja o Tarma sin límite de kilómetros.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="nosotros" id="nosotros" aria-labelledby="tituloNosotros">
+        <div class="wrap nosotros__grid">
+          <div class="nosotros__image-wrap">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Huancayo.jpg"
+              alt="Oficina de AutoRenta Huancayo en el centro de la ciudad"
+              width="620"
+              height="560"
+              loading="lazy"
+            />
+          </div>
+          <div class="nosotros__texto">
+            <h2 id="tituloNosotros" class="section__title">Somos una empresa huancaína</h2>
+            <p>
+              Desde el centro de Huancayo abastecemos de vehículos a viajeros, familias y empresas
+              que necesitan moverse por el Valle del Mantaro. Conocemos las rutas, el clima de
+              altura y lo que necesita tu auto para subir a Tarma o bajar hasta Izcuchaca sin
+              contratiempos.
+            </p>
+            <dl class="nosotros__stats">
+              <div>
+                <dt>Años operando</dt>
+                <dd>+8</dd>
+              </div>
+              <div>
+                <dt>Vehículos</dt>
+                <dd>+50</dd>
+              </div>
+              <div>
+                <dt>Clientes atendidos</dt>
+                <dd>+3000</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
+      <section class="testimonios" aria-labelledby="tituloTestimonios">
+        <div class="wrap">
+          <h2 id="tituloTestimonios" class="section__title">Lo que dicen nuestros clientes</h2>
+          <div class="testimonios__grid">
+            <blockquote class="testimonio-card">
+              <p class="testimonio-card__estrellas" aria-label="5 de 5 estrellas">★★★★★</p>
+              <p>
+                “Reservé la Hilux para subir a Tarma y la entrega en el hotel fue puntual. Todo
+                claro desde el primer momento.”
+              </p>
+              <footer>Rosa M. · El Tambo</footer>
+            </blockquote>
+
+            <blockquote class="testimonio-card">
+              <p class="testimonio-card__estrellas" aria-label="5 de 5 estrellas">★★★★★</p>
+              <p>
+                “El Yaris estuvo impecable y el kilometraje libre me permitió llegar hasta la Laguna
+                de Paca sin preocuparme por la cuenta.”
+              </p>
+              <footer>Jorge P. · Huancayo centro</footer>
+            </blockquote>
+
+            <blockquote class="testimonio-card">
+              <p class="testimonio-card__estrellas" aria-label="4 de 5 estrellas">★★★★☆</p>
+              <p>
+                “Buena atención y precios claros. La Sportage se sintió cómoda incluso en las curvas
+                hacia Jauja.”
+              </p>
+              <footer>Lucía A. · Chilca</footer>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+      <section class="reserva" id="contacto" aria-labelledby="tituloReserva">
+        <div class="wrap reserva__grid">
+          <div class="reserva__intro">
+            <h2 id="tituloReserva" class="section__title">Reserva tu vehículo</h2>
+            <p class="section__lead">
+              Completa tus datos y fechas. Te confirmamos disponibilidad el mismo día.
+            </p>
+            <p class="reserva__nota">
+              Todos los campos marcados con <span aria-hidden="true">*</span> son obligatorios.
+            </p>
+          </div>
+
+          <form class="form-reserva" id="formularioReserva" novalidate>
+            <div class="campo">
+              <label for="campoNombre">Nombre completo *</label>
+              <input
+                type="text"
+                id="campoNombre"
+                name="nombre"
+                autocomplete="name"
+                required
+                minlength="3"
+              />
+              <p class="campo__error" id="errorNombre" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="campoEmail">Correo electrónico *</label>
+              <input type="email" id="campoEmail" name="email" autocomplete="email" required />
+              <p class="campo__error" id="errorEmail" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="campoTelefono">Teléfono *</label>
+              <input
+                type="tel"
+                id="campoTelefono"
+                name="telefono"
+                autocomplete="tel"
+                placeholder="9XXXXXXXX"
+                required
+              />
+              <p class="campo__error" id="errorTelefono" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="campoVehiculo">Tipo de vehículo *</label>
+              <select id="campoVehiculo" name="vehiculo" required>
+                <option value="">Selecciona una opción</option>
+                <option value="economico">Económico</option>
+                <option value="sedan">Sedán</option>
+                <option value="suv">SUV</option>
+                <option value="camioneta">Camioneta 4x4</option>
+              </select>
+              <p class="campo__error" id="errorVehiculo" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="campoInicio">Fecha de recojo *</label>
+              <input type="date" id="campoInicio" name="fechaInicio" required />
+              <p class="campo__error" id="errorInicio" role="alert"></p>
+            </div>
+
+            <div class="campo">
+              <label for="campoFin">Fecha de devolución *</label>
+              <input type="date" id="campoFin" name="fechaFin" required />
+              <p class="campo__error" id="errorFin" role="alert"></p>
+            </div>
+
+            <div class="campo campo--completo">
+              <label for="campoMensaje">Cuéntanos tu ruta (opcional)</label>
+              <textarea id="campoMensaje" name="mensaje" rows="3"></textarea>
+            </div>
+
+            <div class="campo campo--completo campo--checkbox">
+              <input type="checkbox" id="campoTerminos" name="terminos" required />
+              <label for="campoTerminos">Acepto los términos y condiciones del servicio *</label>
+              <p class="campo__error" id="errorTerminos" role="alert"></p>
+            </div>
+
+            <div class="campo campo--completo">
+              <button type="submit" class="btn btn--primary" id="botonEnviar">
+                Enviar solicitud
+              </button>
+              <p class="form-mensaje" id="mensajeFormulario" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap footer__grid">
+        <div class="footer__col">
+          <a href="#inicio" class="brand brand--footer">
+            <span class="brand__mark">AH</span>
+            <span class="brand__text">AutoRenta <em>Huancayo</em></span>
+          </a>
+          <p>Renta de vehículos para moverte por el Valle del Mantaro con confianza.</p>
+        </div>
+
+        <div class="footer__col">
+          <h3>Enlaces</h3>
+          <ul>
+            <li><a href="#vehiculos">Vehículos</a></li>
+            <li><a href="#simulador">Flota en vivo</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#contacto">Reservar</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h3>Contacto</h3>
+          <address>
+            Jr. Real 685, Huancayo, Junín<br />
+            <a href="tel:+51964123456">+51 964 123 456</a><br />
+            <a href="mailto:[email protected]">[email protected]</a>
+          </address>
+        </div>
+
+        <div class="footer__col">
+          <h3>Síguenos</h3>
+          <ul class="footer__social">
+            <li><a href="#" aria-label="Facebook de AutoRenta Huancayo">F</a></li>
+            <li><a href="#" aria-label="Instagram de AutoRenta Huancayo">I</a></li>
+            <li><a href="#" aria-label="TikTok de AutoRenta Huancayo">T</a></li>
+            <li><a href="#" aria-label="WhatsApp de AutoRenta Huancayo">W</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="wrap footer__bottom">
+        <p>© <span id="anioActual">2026</span> Universidad Nacional del Centro del Perú</p>
+        <p>Facultad de Ingeniería de Sistemas</p>
+        <p>Asignatura Desarrollo de Aplicaciones Web</p>
+        <p>Gago Uribe Edgar Robert</p>
+      </div>
+    </footer>
+  </body>
+</html>
