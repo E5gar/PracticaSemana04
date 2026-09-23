@@ -262,8 +262,8 @@
           <div class="simulador__texto">
             <h2 id="tituloSimulador" class="section__title">Así se mueve nuestra flota</h2>
             <p class="section__lead">
-              Una animación interactiva (no es data real de GPS) que muestra cómo distribuimos los
-              vehículos disponibles por la ciudad a lo largo del día. Juega con los controles.
+              Una animación interactiva que muestra cómo distribuimos los vehículos disponibles por
+              la ciudad a lo largo del día. Juega con los controles.
             </p>
 
             <div class="simulador__controles">
@@ -333,6 +333,175 @@
               role="img"
               aria-label="Animación de vehículos moviéndose sobre un plano de la ciudad"
             ></canvas>
+          </div>
+        </div>
+      </section>
+      <section class="taller-interactivo" id="tallerInteractivo" aria-labelledby="tituloTaller">
+        <div class="wrap">
+          <h2 id="tituloTaller" class="section__title">
+            Bajo el capó: cómo armamos este simulador
+          </h2>
+          <p class="section__lead">
+            Activa cada paso del taller para ver, en vivo, la pieza de código que mueve a nuestra
+            flota virtual. A la derecha se va mostrando el bloque correspondiente.
+          </p>
+
+          <div class="taller-container">
+            <div class="taller-columna">
+              <button type="button" class="taller-toggle" data-taller-paso="1">
+                <span class="taller-num">1</span>
+                Tablero + Canvas: escribe el modelo de tu auto
+                <span class="taller-flecha">▸</span>
+              </button>
+              <div class="taller-panel" id="tallerPanel1" data-taller-panel="1">
+                <div class="taller-panel-inner">
+                  <div class="taller-controles-fila">
+                    <input
+                      type="text"
+                      id="tallerInputModelo"
+                      placeholder="Ej: Hilux, Yaris, Sportage..."
+                    />
+                    <button type="button" class="btn btn--primary" id="tallerBotonPlay1">
+                      ▶ Play
+                    </button>
+                    <button type="button" class="btn btn--ghost" id="tallerBotonLimpiar1">
+                      Limpiar
+                    </button>
+                    <button type="button" class="btn btn--motor3d" id="tallerBotonMotor1">
+                      Encender motor
+                    </button>
+                  </div>
+                  <canvas
+                    id="tallerCanvas1"
+                    width="600"
+                    height="200"
+                    role="img"
+                    aria-label="Modelo de vehículo animado en el tablero"
+                  ></canvas>
+                </div>
+              </div>
+
+              <button type="button" class="taller-toggle" data-taller-paso="2">
+                <span class="taller-num">2</span>
+                IIFE + Closures: contador de arranques del motor
+                <span class="taller-flecha">▸</span>
+              </button>
+              <div class="taller-panel" id="tallerPanel2" data-taller-panel="2">
+                <div class="taller-panel-inner">
+                  <p class="taller-contador-display">
+                    <strong id="tallerValorArranques">0</strong> arranques
+                  </p>
+                  <div class="taller-controles-fila">
+                    <button type="button" class="btn btn--primary" id="tallerBotonArrancar">
+                      🔑 Arrancar
+                    </button>
+                    <button type="button" class="btn btn--ghost" id="tallerBotonReiniciarContador">
+                      Reiniciar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" class="taller-toggle" data-taller-paso="3">
+                <span class="taller-num">3</span>
+                DOM + Validación: luces, bocina y reset
+                <span class="taller-flecha">▸</span>
+              </button>
+              <div class="taller-panel" id="tallerPanel3" data-taller-panel="3">
+                <div class="taller-panel-inner">
+                  <div class="taller-auto-icono" id="tallerAutoIcono">
+                    <span class="taller-auto-faro taller-auto-faro--izq"></span>
+                    <span class="taller-auto-faro taller-auto-faro--der"></span>
+                    <span class="taller-auto-rueda taller-auto-rueda--izq"></span>
+                    <span class="taller-auto-rueda taller-auto-rueda--der"></span>
+                  </div>
+                  <p class="taller-error" id="tallerErrorPaso3"></p>
+                  <div class="taller-controles-fila">
+                    <button type="button" class="btn btn--primary" id="tallerBotonLuces">
+                      Luces
+                    </button>
+                    <button type="button" class="btn btn--sage" id="tallerBotonPasajero">
+                      + Pasajero
+                    </button>
+                    <button type="button" class="btn btn--motor3d" id="tallerBotonBocina">
+                      Bocina
+                    </button>
+                    <button type="button" class="btn btn--ghost" id="tallerBotonResetAuto">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" class="taller-toggle" data-taller-paso="4">
+                <span class="taller-num">4</span>
+                Canvas API + requestAnimationFrame: carretera con autos
+                <span class="taller-flecha">▸</span>
+              </button>
+              <div class="taller-panel" id="tallerPanel4" data-taller-panel="4">
+                <div class="taller-panel-inner">
+                  <canvas
+                    id="tallerCanvas4"
+                    width="600"
+                    height="220"
+                    role="img"
+                    aria-label="Autos circulando por una carretera animada"
+                  ></canvas>
+                  <div class="taller-controles-fila">
+                    <button type="button" class="btn btn--primary" id="tallerBotonIniciarCarretera">
+                      Iniciar animación
+                    </button>
+                    <button type="button" class="btn btn--ghost" id="tallerBotonDetenerCarretera">
+                      Detener
+                    </button>
+                    <button type="button" class="btn btn--sage" id="tallerBotonAgregarAuto">
+                      + Auto
+                    </button>
+                  </div>
+                  <p class="taller-metricas">
+                    <span><strong id="tallerValorFpsCarretera">0</strong> fps</span>
+                  </p>
+                </div>
+              </div>
+
+              <button type="button" class="taller-toggle" data-taller-paso="5">
+                <span class="taller-num">5</span>
+                Diagnóstico del vehículo: rendimiento y memoria
+                <span class="taller-flecha">▸</span>
+              </button>
+              <div class="taller-panel" id="tallerPanel5" data-taller-panel="5">
+                <div class="taller-panel-inner">
+                  <div class="taller-dashboard-grid">
+                    <div class="taller-dashboard-tile">
+                      <span>FPS</span><strong id="tallerDashFps">0</strong>
+                    </div>
+                    <div class="taller-dashboard-tile">
+                      <span>Memoria MB</span><strong id="tallerDashMemoria">0</strong>
+                    </div>
+                    <div class="taller-dashboard-tile">
+                      <span>Sensores activos</span><strong id="tallerDashListeners">0</strong>
+                    </div>
+                  </div>
+                  <div class="taller-controles-fila">
+                    <button type="button" class="btn btn--primary" id="tallerBotonAnalizar">
+                      Analizar rendimiento
+                    </button>
+                    <button type="button" class="btn btn--ghost" id="tallerBotonFugaSensor">
+                      Simular fuga de sensor
+                    </button>
+                    <button type="button" class="btn btn--sage" id="tallerBotonLimpiarFuga">
+                      Limpieza
+                    </button>
+                  </div>
+                  <p class="taller-metricas" id="tallerResultadoDiagnostico"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="taller-codigo-columna">
+              <h3>Código del taller</h3>
+              <div id="tallerContenedorCodigo"></div>
+            </div>
           </div>
         </div>
       </section>
