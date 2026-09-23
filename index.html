@@ -12,5 +12,40 @@
     <script src="canvas.js" defer></script>
     <script src="reservas.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <header class="site-header" id="topeHeader">
+      <div class="wrap header__inner">
+        <a href="#inicio" class="brand">
+          <span class="brand__mark">AH</span>
+          <span class="brand__text">AutoRenta <em>Huancayo</em></span>
+        </a>
+
+        <nav class="nav" id="navPrincipal">
+          <ul class="nav__list">
+            <li><a href="#inicio" class="nav__link is-active">Inicio</a></li>
+            <li><a href="#vehiculos" class="nav__link">Vehículos</a></li>
+            <li><a href="#simulador" class="nav__link">Flota en vivo</a></li>
+            <li><a href="#servicios" class="nav__link">Servicios</a></li>
+            <li><a href="#nosotros" class="nav__link">Nosotros</a></li>
+            <li><a href="#contacto" class="nav__link">Contacto</a></li>
+          </ul>
+        </nav>
+
+        <a href="#contacto" class="btn btn--primary btn--small header__cta">Reservar ahora</a>
+
+        <button
+          type="button"
+          class="hamburger"
+          id="botonHamburguesa"
+          aria-expanded="false"
+          aria-controls="navPrincipal"
+          aria-label="Abrir menú de navegación"
+        >
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+        </button>
+      </div>
+    </header>
+  </body>
 </html>
