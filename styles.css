@@ -747,3 +747,106 @@ p {
   color: var(--color-ink-light);
   font-size: 0.88rem;
 }
+
+
+/* PARTE 11: FORMULARIO DE RESERVA */
+.reserva {
+  padding: var(--space-7) 0;
+}
+
+.reserva__grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.reserva__nota {
+  font-size: 0.85rem;
+  color: var(--color-ink-light);
+}
+
+.form-reserva {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  background: var(--color-white);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.campo--completo {
+  grid-column: 1 / -1;
+}
+
+.campo--checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.campo label {
+  font-size: 0.9rem;
+  color: var(--color-ink-light);
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-cream-soft);
+  background: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-ink);
+  transition: border-color var(--transition-base), background var(--transition-base);
+}
+
+.campo input:hover,
+.campo select:hover,
+.campo textarea:hover {
+  border-color: var(--color-sky);
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  border-color: var(--color-clay);
+  background: var(--color-white);
+  outline: none;
+}
+
+.campo.campo--invalido input,
+.campo.campo--invalido select,
+.campo.campo--invalido textarea {
+  border-color: var(--color-error);
+  background: var(--color-clay-soft);
+}
+
+.campo__error {
+  min-height: 1.1em;
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--color-error);
+}
+
+.form-mensaje {
+  margin: var(--space-2) 0 0;
+  font-size: 0.92rem;
+}
+
+.form-mensaje.exito {
+  color: #4B7A5A;
+}
+
+.form-mensaje.error {
+  color: var(--color-error);
+}
