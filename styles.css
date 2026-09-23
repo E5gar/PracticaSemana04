@@ -1,0 +1,96 @@
+/* PARTE 1: VARIABLES GLOBALES Y RESET */
+:root {
+  --color-cream: #FBF3EC;
+  --color-cream-soft: #F3E9DE;
+  --color-sky: #B8D8D8;
+  --color-sky-soft: #DCEBEB;
+  --color-clay: #E8B4A8;
+  --color-clay-soft: #F3D9D2;
+  --color-sage: #C3D8C5;
+  --color-sage-soft: #E1EBE2;
+  --color-mustard: #EAD6A7;
+  --color-mustard-soft: #F5EAD1;
+  --color-ink: #3E3A39;
+  --color-ink-light: #726B67;
+  --color-white: #FFFFFF;
+  --color-error: #C0554A;
+
+  --particle-color: var(--color-sky);
+
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+  --font-body: -apple-system, 'Segoe UI', Roboto, system-ui, sans-serif;
+
+  --space-1: 0.4rem;
+  --space-2: 0.8rem;
+  --space-3: 1.2rem;
+  --space-4: 1.8rem;
+  --space-5: 2.6rem;
+  --space-6: 3.6rem;
+  --space-7: 5rem;
+  --space-8: 7rem;
+
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+
+  --shadow-sm: 0 4px 14px rgba(62, 58, 57, 0.08);
+  --shadow-md: 0 14px 34px rgba(62, 58, 57, 0.14);
+
+  --transition-base: 220ms ease;
+  --nav-height: 78px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-cream);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol, dl {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  margin: 0 0 var(--space-3);
+  font-weight: 600;
+}
+
+p {
+  margin: 0 0 var(--space-3);
+  max-width: 62ch;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-clay);
+  outline-offset: 3px;
+}
+
+.wrap {
+  width: min(1180px, 92%);
+  margin-inline: auto;
+}
